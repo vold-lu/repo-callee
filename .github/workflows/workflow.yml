@@ -11,6 +11,7 @@ jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - run: |
           touch ${{ github.event.client_payload.version }}
           git config user.name github-actions
