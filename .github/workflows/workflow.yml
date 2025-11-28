@@ -1,0 +1,13 @@
+name: MyWorkflow
+
+on:
+  repository_dispatch:
+    types: [new-release]
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Say Hello
+        run: |
+          echo "Hello World!"
