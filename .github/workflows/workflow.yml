@@ -1,5 +1,8 @@
 name: MyWorkflow
 
+permissions:
+  contents: write
+
 on:
   repository_dispatch:
     types: [new-release]
@@ -8,6 +11,10 @@ jobs:
   hello:
     runs-on: ubuntu-latest
     steps:
-      - name: Say Hello
-        run: |
-          echo "Hello World!"
+      - run: |
+          touch ${{ github.event.client_payload.version }}
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add .
+          git commit -m "Release ${{ github.event.client_payload.version }}"
+          git push
